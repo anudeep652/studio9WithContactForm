@@ -5,7 +5,6 @@ const OAuth2 = google.auth.OAuth2;
 const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const express = require("express");
-var alert = require("alert");
 
 
 
@@ -103,8 +102,11 @@ app.post("/submit-form", (req, res) => {
 
 });
 
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
 
-const port = process.env.PORT || 3000;
 app.listen(port, () => {
      console.log("server started");
 })
