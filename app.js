@@ -52,7 +52,7 @@ app.post("/submit-form", (req, res) => {
           service: "gmail",
           auth: {
                type: "OAuth2",
-               user: "websitecontactform9@gmail.com",
+               user: process.env.USER,
                clientId: process.env.CLIENT_ID,
                clientSecret: process.env.CLIENT_SECRET,
                refreshToken: process.env.REFRESH_TOKEN,
@@ -66,17 +66,18 @@ app.post("/submit-form", (req, res) => {
 
 
      const mailOptions = {
-          from: "websitecontactform9@gmail.com",
-          to: "anudeepsvka@gmail.com,ronaldocr7deep@gmail.com",
+          from: process.env.FROM_EMAIL,
+          to: process.env.TO_EMAIL,
           subject: "New message from Studio9 website!",
           generateTextFromHTML: true,
           html: `<p>You have a new contact request</p>
                     <h3>Contact Details</h3>
                     <ul>  
                          <li>Name: ${req.body.name}</li>
-                         <li>Company: ${req.body.company}</li>
+                         <li>Phone number: ${req.body.phone}</li>
                          <li>Email: ${req.body.email}</li>
                          <li>Phone: ${req.body.phone}</li>
+                         <li>Subject: ${req.body.subject}</li>
                     </ul>
                     <h3>Message</h3>
                     <p>${req.body.message}</p>  `
